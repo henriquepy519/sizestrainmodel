@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grafico com Plotly</title>
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>         
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+    
+            /* Estilos da barra de menu */
+    
+    nav {
+        background-color: #00bcd4;
+        padding: 0 20px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+    
+    nav ul {
+        list-style-type: none; 
+        padding: 0; 
+        margin: 0; 
+        display: flex; 
+        gap: 15px;
+        align-items: center;
+    }
+    
+    nav a {
+        color: #fff;
+        text-decoration: none;
+        padding: 15px 10px;
+        display: block;
+        position: relative;
+    }
+    
+    nav a:hover {
+        background-color: rgba(255,255,255,0.1);
+    }
+    
+    nav > ul > li {
+        position: relative;
+    }
+    
+    /* Estilos para o menu suspenso */
+    
+    nav > ul > li > ul {
+        list-style-type: none; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        background-color: #fff; 
+        box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+        display: none;
+        min-width: 150px;
+        z-index: 10;
+    }
+    
+    nav > ul > li:hover > ul {
+        display: block;
+    }
+    
+    nav > ul > li > ul > li {
+        width: 100%;
+    }
+    
+    nav > ul > li > ul > li > a {
+        color: #333;
+    }
+    
+    nav > ul > li > ul > li > a:hover {
+        background-color: #f5f5f5;
+    }     
+    
+            body {
+                background-size: cover;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                font-family: Arial, sans-serif;
+                background-color: #c1e7e5;
+            }
+            .container {
+                width: 400px;
+                margin: 30px auto;
+                padding: 20px;
+                box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+                border-radius: 8px;
+                background-color: #ffffff;
+            }
+            .section {
+                border: 1px solid #e0e0e0;
+                margin: 15px 0;
+                padding: 20px;
+                border-radius: 5px;
+                transition: box-shadow 0.3s;
+            }
+            .section:hover {
+                box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+            }
+            h3 {
+                font-size: 18px;
+                margin-bottom: 15px;
+                color: #333;
+                border-bottom: 2px solid #00bcd4;
+                padding-bottom: 10px;
+                display: inline-block;
+            }
+            select, button, input[type="file"] {
+                width: 100%;
+                padding: 10px;
+                margin: 10px 0;
+                border: 1px solid #d1d1d1;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+            button {
+                background-color: #00bcd4;
+                color: #fff;
+                font-size: 16px;
+                transition: background-color 0.3s;
+            }
+            button:hover {
+                background-color: #0097a7;
+            }
+            i.fas {
+                margin-right: 10px;
+                color: #00bcd4;
+            }
+            #logo {
+                position: relative; /* Alterando de 'absolute' para 'relative' */
+                margin: 20px 0;
+                width: 150px; 
+           }
+    </style>
+</head>
+    
+<body>
+    <div id="div-plotly"></div>
+    <script>
+        var dados = {{ graphJSON | safe }};
+        Plotly.newPlot('div-plotly', dados.data, dados.layout);
+    </script>
+
+<form action='/Fit_inst' method="post"> 
+    <label for="format">Choose file format:</label>
+    <select name="format" id="format">
+      <option value="txt">TXT</option>
+      <option value="csv">CSV</option>
+    </select><br><br>
+
+    <button type="submit" id="format">Export Data</button>
+</form>
+<style>
+    #Export Data {
+        width: 150px;      /* Largura fixa do botão */
+        height: 50px;      /* Altura fixa do botão */
+    }
+
+    #format {
+        width: 150px;      /* Largura fixa do botão */
+        height: 50px;      /* Altura fixa do botão */
+    }
+</style>
+
+
+</main>
+
+    <footer style="text-align: center; margin-top: 30px; font-size: 14px; color: #666;">
+        Copyright © 2023 |Laboratório de Raio X- Universidade Federal do Ceará | Developed By Carlos Henrque
+    </footer>
+</div>
+
+
+
+</body>
+</html>
