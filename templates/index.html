@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script type="text/javascript" async
+        src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-MML-AM_CHTML">
+    </script>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Size Strain Models</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <style>
+
+<body>
+
+    <nav>
+        <ul>
+            <li>
+                <a href="#"><i class="fas fa-file-alt"></i> File</a>
+                <!-- Menu suspenso para File -->
+                <ul>
+                    <li><a href="#"><i class="fas fa-folder-open"></i> Open</a></li>
+                    <li><a href="#"><i class="fas fa-save"></i> Save</a></li>
+                    <li><a href="#"><i class="fas fa-times"></i> Close</a></li>
+                </ul>
+            </li>
+
+            <li>
+                <a href="#"><i class="fas fa-file-export"></i> Export Data</a>
+                <!-- Menu suspenso para Export Data -->
+                <ul>
+                    <li><a href="#"><i class="fas fa-file-export"></i> Exp. data-Iso. Model</a></li>
+                    <li><a href="#"><i class="fas fa-file-export"></i> Exp. data-Ani. Model</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Linear Fit - Isotropic Model</a></li>
+                    <li><a href="#"><i class="fas fa-chart-line"></i> Linear Fit - Anisotropic Model</a></li>
+                    <li><a href="#"><i class="fas fa-file"></i> Instrumental File</a></li>
+                </ul>
+            </li>
+
+
+            <li>
+
+            <li>
+                <a href="#"><i class="fas fa-question-circle"></i> Help</a>
+                <!-- Menu suspenso para Help -->
+                <ul>
+                    <li><a href="#" id="aboutLink"><i class="fas fa-info-circle"></i> About Size-Strain Model</a></li>
+                    <li><a href="#" id="tutorial"><i class="fas fa-book"></i> Tutorial</a></li>
+                    <li><a href="#" id="version"><i class="fas fa-tag"></i> Version 1.0.0</a></li>
+                </ul>
+            </li>
+
+
+        </ul>
+    </nav>
+
+</div>
+
+
+<script>
+    // Função para abrir o modal
+    function openModal() {
+        document.getElementById('tutorialModal').style.display = 'block';
+        // Chamada para renderizar o conteúdo LaTeX
+        MathJax.Hub.Queue(["Typeset", MathJax.Hub]);
+    }
+
+    // Função para fechar o modal
+    function closeModal() {
+        document.getElementById('tutorialModal').style.display = 'none';
+    }
+</script>
+
+
+
+
+<div class="container">
+    <!-- Modelos Isotrópicos -->
+
+    <section class="section">
+        <h3><i class="fas fa-wave-square"></i>Isotropic Models</h3>
+
+        <form action='/wavelength' method="post" enctype="multipart/form-data">
+            <label for="wavelength">Wave-length:</label>
+            <select id="wavelength" name="wavelength">
+                <option value="Cu">Cu K-alpha1</option>
+                <option value="Mo">Mo K-alpha1</option>
+                <option value="Co">Co K-alpha1</option>
+                <option value="Cr">Cr K-alpha1</option>
+            </select>
+        </form>
+
+        <form action='/plot' method="post" enctype="multipart/form-data">
+            <label for="modelo">Select Model:</label>
+            <select id="modelo" name="selecao_modelo">
+                <option value="WHP">WHP</option>
+                <option value="SSP">SSP</option>
+                <option value="HWP">HWP</option>
+            </select>
+            <input type="file" name="file">
+            <input type="submit" value="Fit Model">
+        </form>
+
+        <div class="dropdown">
+            <div class="dropdown-content">
+                <form action='/import/instrumental-file' method="post" enctype="multipart/form-data">
+                    <label for="fileInput">Instrumental File:</label>
+
+
+                    <input type="file" id="fileInput" name="file">
+                    <input type="submit" value="Fit Instrumental File">
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modelos Anisotrópicos -->
+
+
+    <section class = "section">
+        <h3><i class="fas fa-globe"></i>Anisotropic Models</h3>
+        <form action='/plot_ani' method="post" enctype="multipart/form-data">
+            <label for="modelo2">Select Model:</label>
+            <select id="modelo2" name="selecao_modelo">
+                <option value="UDSM">UDSM</option>
+                <option value="UDEDM">UDEDM</option>
+                <option value="UDSM - SSP">UDSM - SSP</option>
+            </select>
+            <input type="file" name="file">
+            <input type="submit" value="Fit Model">
+        </form>
+
+        <form action='/input_form' method="post" enctype="multipart/form-data">
+            <button type="submit" id="format">Insert Const</button>
+        </form>
+        <style>
+
+                #format {
+                    width: 150px;      /* Largura fixa do botão */
+                    height: 38px;      /* Altura fixa do botão */
+                }
+        </style>
+
+        <div class="dropdown">
+            <div class="dropdown-content">
+                <form action='/import/instrumental-file' method="post" enctype="multipart/form-data">
+                    <label for="fileInput">Instrumental File:</label>
+
+
+                    <input type="file" id="fileInput" name="file">
+                    <input type="submit" value="Fit Instrumental File">
+                </form>
+            </div>
+        </div>
+    </section>
+
+</main>
+    <footer style="text-align: center; margin-top: 30px; font-size: 14px; color: #666;">
+        Copyright © 2023 |Laboratório de Raio X- Universidade Federal do Ceará | Developed By Carlos Henrque
+    </footer>
+</div>
+
+<script>
+    function handleFile() {
+        const fileInput = document.getElementById('csvFile');
+        const fileStatus = document.getElementById('fileStatus');
+
+        if (fileInput.files.length) {
+            fileStatus.textContent = `Selected: ${fileInput.files[0].name}`;
+        } else {
+            fileStatus.textContent = "No file selected";
+        }
+    }
+
+    // Função para fechar a janela
+    document.getElementById('closeButton').addEventListener('click', function() {
+        window.close();
+    });
+
+    document.getElementById('aboutLink').addEventListener('click', function(event) {
+        event.preventDefault(); // Evita que a página seja recarregada
+        document.getElementById('helpModal').style.display = 'block';
+    });
+
+    document.getElementById('closeHelp').addEventListener('click', function() {
+        document.getElementById('helpModal').style.display = 'none';
+    });
+
+    document.getElementById('tutorial').addEventListener('click', function() {
+        document.getElementById('tutorialModal').style.display = 'block';
+    });
+
+    document.getElementById('closeTutorial').addEventListener('click', function() {
+        document.getElementById('tutorialModal').style.display = 'none';
+    });
+
+</script>
+
+</body>
+</html>
+
+
+</body>
+</html>
+

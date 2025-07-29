@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block body %}
+    <div id="div-plotly"></div>
+    <script>
+        var dados = {{ graphJSON | safe }};
+        Plotly.newPlot('div-plotly', dados.data, dados.layout);
+    </script>
+
+<form action='/' method="post"> 
+    <label for="format">Choose file format:</label>
+    <select name="format" id="format">
+        <option value="txt">TXT</option>
+        <option value="csv">CSV</option>
+     </select>   
+
+    <button type="submit" id="format">Export Data</button>
+</form>
+<style>
+    #Export_Data {
+        width: 150px;      /* Largura fixa do botão */
+        height: 50px;      /* Altura fixa do botão */
+    }
+
+    #format {
+        width: 150px;      /* Largura fixa do botão */
+        height: 50px;      /* Altura fixa do botão */
+    }
+</style>
+{% endblock %}

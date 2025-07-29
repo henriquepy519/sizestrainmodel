@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+<div class="container">
+    <section class = "section">
+        <h3><i class="fas fa-globe"></i>Anisotropic Models</h3>
+
+        <form action='/plot_ani' method="post" enctype="multipart/form-data">
+            <label for="modelo2" style="text-align: left; display: block;">Wave-length:</label>
+            <select id="wave" name="wavelength">
+                <option value="Cu">Cu K-alpha1</option>
+                <option value="Mo">Mo K-alpha1</option>
+                <option value="Co">Co K-alpha1</option>
+                <option value="Cr">Cr K-alpha1</option>
+                <option value="Ag">Fe K-alpha1</option>
+                <option value="Fe">Ag K-alpha1</option>
+            </select>
+
+            <label for="formfactor" style="text-align: left; display: block;">Shape Factor:</label>
+            <input id="formfactor" name="formfactor" type="number" step="any">
+
+
+
+
+
+            <label for="modelo2" style="text-align: left; display: block;">Select Model:</label>
+            <select id="modelo2" name="selecao_modelo">
+                <option value="UDSM">UDSM - WHP</option>
+                <option value="UDEDM">UDEDM - WHP </option>
+                <option value="UDSM - SSP">UDSM - SSP</option>
+            </select>
+            <input type="file" name="file">
+            <input type="submit" value="Fit Model">
+        </form>
+        <style>
+            /* Diminuir o tamanho da fonte para o formulário */
+            form {
+                font-size: 0.8rem; /* Este valor pode ser ajustado conforme necessário */
+            }
+
+            /* Estilizar o label */
+            form label {
+                display: block; /* Garante que o label ocupe sua própria linha */
+                margin-bottom: 0.5rem; /* Espaçamento abaixo do label */
+            }
+
+            /* Estilizar o select */
+            form select {
+                width: 100%; /* Ocupa a largura total do container do formulário */
+                padding: 0.375rem; /* Espaçamento interno */
+                margin-bottom: 1rem; /* Espaçamento abaixo do select */
+            }
+        </style>
+        <form action='/input_form' method="post" enctype="multipart/form-data">
+            <button type="submit" id="format">Insert Const</button>
+        </form>
+        <style>
+
+                #format {
+                    width: 150px;      /* Largura fixa do botão */
+                    height: 38px;      /* Altura fixa do botão */
+                }
+        </style>
+
+    </section>
+</div>
+
+
+
+{% endblock %}

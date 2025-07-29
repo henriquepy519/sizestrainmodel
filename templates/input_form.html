@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Input Form 6x6</title>
+</head>
+<body>
+    <form method="post">
+        <table>
+            {% for row in range(6) %}
+            <tr>
+                {% for col in range(6) %}
+                <td>
+                    <input type="number" name="float_{{ loop.index0 + row * 6 + 1 }}" step="any" value="0">
+                </td>
+                {% endfor %}
+            </tr>
+            {% endfor %}
+        </table>
+        <input type="submit" value="Submit">
+    </form>
+</body>
+</html>

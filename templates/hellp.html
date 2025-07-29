@@ -1,0 +1,636 @@
+{% extends 'base.html' %}
+
+{% block body %}
+
+    <script>
+        function toggleContent(id) {
+            var content = document.getElementById(id);
+            if (content.style.display === "none") {
+                content.style.display = "block";
+            } else {
+                content.style.display = "none";
+            }
+        }
+    </script>
+
+    <style>
+        .content {
+            display: none;
+            margin: 10px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+    </style>
+
+    <style>
+            .container {
+
+                width: 70%; /* Ajuste a largura conforme desejado */
+                max-width: 1200px; /* Um máximo para evitar que fique muito grande em telas grandes */
+                margin: 20px auto; /* Para centralizar */
+                padding: 20px; /* Espaçamento interno para não colar o conteúdo nas bordas */
+                text-align: justify;
+            }
+
+            .cont {
+
+                width: 70%; /* Ajuste a largura conforme desejado */
+                max-width: 1200px; /* Um máximo para evitar que fique muito grande em telas grandes */
+                margin: 15px auto; /* Para centralizar */
+                padding: 15px; /* Espaçamento interno para não colar o conteúdo nas bordas */
+                text-align: justify;
+                background-color: White;
+                border-radius: 10px;
+                margin-top: 10px; /* Margem superior de 20px */
+                margin-bottom: 20px; /* Margem inferior de 20px */
+            }
+
+            .titulo-centralizado {
+                text-align: center;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+        /* Outras definições CSS para .container, etc. */
+    </style>
+
+    <style>
+        p {
+                text-indent: 20px; /* Indenta a primeira linha de cada parágrafo em 50 pixels */
+        }
+    </style>
+
+    <div class="cont">
+        <h2 class="titulo-centralizado"> Help and Support </h2>
+    </div>
+
+    <div class="container">
+        <p>Welcome to the MSS help page! Here, you will find comprehensive guidance to make the most of our software's advanced functionality. To determine the microstructural parameters (average crystallite size and microstrain) in materials using X-ray diffraction, it is necessary to obtain the values of the full width at half maximum (FWHM) and the angular positions for each peak in the sample's diffraction pattern. In the Uniform Deformation Stress Model (UDSM) and the Uniform Deformation Energy Density Model (UDEDM), in addition to the previously mentioned parameters, the Miller indices related to each reflection and the material's specific elastic constants are required. Subsequently, the software performs a linear fit with the ordered pairs to be defined according to the chosen model to obtain the slope coefficient, which is related to the microstrain; and also the intercept coefficient, which refers to the average dimensions of the crystallites. In the sections below, the user will find the basic theoretical foundation for all models, tutorials, examples, and references. </p>
+
+
+        <p><h3> Tutorials - Calculation models for particle size and isotropic microstrain </h3></p>
+
+        <ul>
+            <li>
+                <a href="javascript:void(0);" onclick="toggleContent('WHP');">Williamson-Hall Uniform Deformation Model (UDM) (Lorentzian Shape)</a>
+            </li>
+
+            <div id="WHP" class="content">
+                <ul>
+
+                    <p>
+                        The Williamson-Hall model is a technique for analyzing X-ray diffraction data in polycrystalline materials. It is used to separate strain (microstrain) contributions on crystal lattice and particle size. The model relies on the Scherrer (SCHERRER, 1918) and Stokes-Wilson (STOKES, 1943) equations. The Stokes-Wilson equation assumes that the microstrain \( \epsilon \) is directly proportional to term \( \beta_{\epsilon} \) and inversely proportional to the tangent of the Bragg angle. The crystal size and microstrain with the broadening of diffraction peaks are defined in equations (\ref{eq:1}) and (\ref{eq:2}) respectively,
+                    </p>
+
+                    <p>
+
+                        \begin{equation}\label{eq:1} \tag{1}
+                           \langle D \rangle  = \frac{K \lambda}{\beta_{D} \cos\theta_{hkl}}
+                        \end{equation}
+                        and
+                        \begin{equation}\tag{2} \label{eq:2}
+                           \langle \epsilon \rangle = \frac{\beta_{\epsilon}}{4 \tan \theta_{hkl}}.
+                        \end{equation}
+                    </p>
+
+                    <p>where \( \langle D \rangle \) is the average crystal size; \( \langle \epsilon \rangle \) is the average microstrain; \( \lambda \) is the incident radiation wavelength; \( \theta_{hkl} \) is the diffraction angle; \( \beta_D \) is the size contribution to the full width at half of the maximum diffraction peak; and \( \beta_\epsilon \) represents the microstrain contribution to the diffraction profile, for which the Miller indices ( \( hkl \) ) correspond to the planes of the diffraction peaks present in the powder diffraction patterns. Parameter \( K \) depends on the particle shape and the reflection type, typically assumed to be spherical and with a value of \( 0.9 \) for spherical crystals.</p>
+
+
+                    <p>Williamson-Hall (WILLIAMSON, 1953) proposed equation (\ref{eq:3}), which shows that the peak shape can be described by a Lorentzian distribution. Thus, it implies that the overall width can be obtained by using the convolution theory. It states that the convolution of two Lorentzian distribution functions results in a Lorentzian distribution function in which the total width is the sum of the widths of the particle size distribution function \( \beta_{D} \) and the microstrain distribution function \( \beta_{\epsilon} \).</p>
+
+                    <p>
+                        \begin{equation} \label{eq:3}
+                        \tag{3}
+                          \beta_{hkl} = \beta_D + \beta_\epsilon
+                        \end{equation}
+                    </p>
+
+                    <p>Substituting the Scherrer and Stokes-Wilson equations corresponding to (\ref{eq:1}) and (\ref{eq:2}), respectively in equation (\ref{eq:3}), one can obtain equation (4). This first case is considered the simplest condition, called the isotropic model or UDM, for which the microdeformation is considered to be the same for all crystallographic directions.</p>
+
+
+                        \begin{equation} \label{eq:4}
+                        \tag{4}
+                           \frac{\beta_{hkl} \cos\theta_{hkl}}{\lambda} = \frac{K}{\langle D \rangle} + \frac{4 \langle \epsilon \rangle \sin \theta_{hkl}}{\lambda}
+                        \end{equation}
+
+                        <p>
+                            To determine the crystallite dimensions and microstrain in materials using X-ray diffraction, it is necessary to obtain the values of \( \beta_{hkl} \) and \( 2\theta_{hkl} \) for each peak in the sample diffraction pattern. Then, a linear fit is performed with the ordered pairs corresponding to \( 4 \sin{\theta_{hkl}}/\lambda \) and \( \beta_{hkl} \cos{\theta_{hkl}}/\lambda \) for obtaining the angular coefficient, which represents the microdeformation; and also the linear coefficient, which refers to the dimensions of the crystallites. Thus, \( K/ \langle D \rangle \) is the slope and \( \langle \epsilon \rangle \) is the linear coefficient.
+                        </p>
+                </ul>
+            </div>
+        </ul>
+
+        <ul>
+
+            <li>
+                <a href="javascript:void(0);" onclick="toggleContent('SSP');">Size-Strain Plot (Gaussian Shape)</a>
+            </li>
+
+
+            <div id="SSP" class="content">
+                <ul>
+                    <p>
+                        The size-strain plot (J. Langford,2000) model is an X-ray diffraction analysis technique also used to determine the size of crystallites and microstrain in crystalline materials. This graphical method assumes that the profile of diffraction peaks is given by the convolution of two Gaussian functions with widths \( \beta_D \) and \( \beta_\epsilon \) in accordance with equation (\ref{eq:5}).
+                    </p>
+
+                    <p>
+                        \begin{equation}\tag{5} \label{eq:5}
+                            \beta_{hkl}^2 = \beta_D^2 + \beta_\epsilon^2
+                        \end{equation}
+                    </p>
+
+
+                    <p>
+                        Starting from the Scherrer and Stokes-Wilson equations and considering that the root mean square (RMS) value of microstrain based on a Gaussian profile is given by \( \langle \epsilon \rangle_{rms} = \epsilon \sqrt{\frac{2}{\pi}} \), it is possible to obtain the equation that will be used for fitting as equation (\ref{eq:6}).
+                    </p>
+
+
+                    <p>
+                        \begin{equation}\label{eq:6} \tag{6}
+                            \frac{d_{hkl}^2\beta_{hkl}^2\cos^2\theta_{hkl}}{\lambda^2} = \frac{K^2 d_{hkl}^2}{\langle D \rangle^2} +  2 \pi {\langle \epsilon \rangle}_{rms}^{2}
+                        \end{equation}
+                    </p>
+
+                    <p>
+                        The calculation of \( \langle D \rangle \) and \( \langle \epsilon \rangle_{rms} \) requires determining the values of \( \beta_{hkl} \) and \( 2\theta_{hkl} \) for each peak in the diffraction pattern from the sample. Thus, it is possible to determine the ordered pairs for each peak, where \( x \) represents \( d_{hkl}^2 \) and \( y \) is given by \( \frac{d_{hkl} ^2\beta_{hkl}^2 \cos^2\theta_{hkl}}{\lambda^2} \). After fitting, one can employ the slope and linear coefficient values to determine \( \langle D \rangle \) and \( \langle \epsilon \rangle_{rms} \). It is also noteworthy that \( (K/ \langle D \rangle)^{2} \) is the slope and \( 2 \pi \langle \epsilon \rangle_{rms}^2 \) is the linear coefficient.
+                    </p>
+                </ul>
+            </div>
+
+
+        </ul>
+
+        <ul>
+
+            <li>
+                <a href="javascript:void(0);" onclick="toggleContent('features');">Halder-Wagner Model (Lorentzian-Gaussian Shape)</a>
+            </li>
+
+
+
+
+
+            <div id="features" class="content">
+                <ul>
+
+                    <p>According to Halder and Wagner (Halder & C. Wagner, 1966), it is not appropriate to assume that the profile of a diffraction peak is exclusively described by the Lorentz function, as stated by the Williamson-Hall technique or exclusively described by the Gaussian function according to the Size-Strain method. This limitation occurs because the Gaussian function does not fit adequately to the tail regions, while the Lorentz function fits well to the tails but not to the peak. To overcome these problems, a symmetric Voigt profile is proposed, which consists of a convolution of the Lorentz function with the Gaussian function. Therefore, the total width is given by equation (\ref{eq:7}), where the width due to the size of the crystallite \( \beta_{D} \) represents the Lorentzian component and the width due to the microstrain \( \beta_\epsilon \) corresponds to the Gaussian component.</p>
+
+                    <p>
+                    \begin{equation}\label{eq:7}
+                    \tag{7}
+                    \beta^2_{hkl} = \beta_D\beta_{hkl} + \beta_\epsilon^2
+                    \end{equation}
+                    </p>
+
+                    <p>Let us consider the Scherrer and Stokes-Wilson equations, that is, (\ref{eq:1}) and  (\ref{eq:2}), as well as that \( d^{*} \) and \( {\beta}'_{hkl} \) are given by equations (\ref{eq:8}) and (\ref{eq:9}), respectively.</p>
+
+                    <p>
+                    \begin{equation} \tag{8} \label{eq:8}
+                    d^\ast = \frac{1}{d_{hkl}} = \frac{2\sin\theta_{hkl}}{\lambda}
+                    \end{equation}
+                    </p>
+
+                    <p>
+                    \begin{equation} \tag{9} \label{eq:9}
+                    {\beta}'_{hkl} = \frac{\beta_{hkl} \cos\theta_{hkl}}{\lambda}
+                    \end{equation}
+                    </p>
+
+                    <p>From some mathematical manipulations, it is possible to obtain the equation used for the fit corresponding to (\ref{eq:1}).</p>
+
+                    <p>
+                    \begin{equation}\tag{10}
+                    (\frac{ \beta'_{hkl}} {d^\ast})^2 = \frac{K}{\langle D \rangle} \frac{ \beta'_{hkl} }{ {d^\ast}^2} + 4 {\langle \epsilon \rangle^2 }
+                    \end{equation}
+                    </p>
+
+                    <p>To calculate the values of \( \langle D \rangle \) and \( \langle \epsilon \rangle \), it is necessary to determine the values of \( \beta_{hkl} \) and \( 2\theta_{hkl} \) for each peak in the sample diffractogram. From such data, one can obtain the ordered pairs for each peak, where \( x \) and \( y \) correspond to \( {\beta}'_{hkl} / {d^\ast}^{2} \) and \( ({\beta}'_{hkl} / {d^\ast})^{2} \), respectively. A linear fitting is performed with such points, where \( K/ \langle D \rangle \) is the angular coefficient and \( 4 \langle \epsilon \rangle^2 \) is the linear coefficient.</p>
+                </ul>
+            </div>
+        </ul>
+
+        <p><h3> Tutorials - Calculation models for particle size and anisotropic microstrain </h3></p>
+
+
+            <ul>
+                <li>
+                    <a href="javascript:void(0);" onclick="toggleContent('aniso');">Theoretical Foundation</a>
+                </li>
+
+
+            </ul>
+
+        <div id="aniso" class="content">
+            <ul>
+                <p>The response of a material to the application of a stress is strongly influenced by its crystallographic orientation, denoted by \([hkl]\). In solid bodies, the deformation resulting from an applied stress is generally recoverable within the elastic limit; that is, the material returns to its original state as soon as the stress is removed. Under low stress conditions, Hooke's Law is applicable, where the deformation is directly proportional to the intensity of the applied stress. This fundamental relationship distinguishes two types of material behavior: isotropic, where mechanical properties are uniform in all directions, and anisotropic, where mechanical properties vary depending on the crystallographic direction. This distinction is fundamental to understanding how different materials respond to different stresses and potentially improving their applications in science and technology. One way to express the relationship between deformations and stresses in crystalline materials is through second order tensors. Consider an isotropic crystal structure subjected to tensile stress \(\sigma\). The longitudinal deformation \(e\) is equal to \(\Delta l / l\), where \(\Delta l\) is the increase in length and \(l\) is the original length. According to Hooke's Law, the relationship between surface tension \(\sigma\) and microstrain \(\epsilon\) is described by the equations (\ref{eq:11}) or (\ref{eq:12}) , where \(E\) represents the Young's modulus of the material and \(S=1/E\) (SNOKE, 2020; HAUSSÜHL, 2007; NYE, 2006).</p>
+
+                <p>
+                    \begin{equation} \tag{11}
+                    \sigma = E_{hkl} \varepsilon \label{eq:11}
+                    \end{equation}
+                </p>
+
+                <p>
+                    \begin{equation} \tag{12}
+                    \varepsilon = S \sigma \label{eq:12}
+                    \end{equation}
+                </p>
+
+
+
+
+                The constant \(S\) is called the elastic compliance constant, or simply compliance, for this specific arrangement of stress and strain directions. Alternatively, we could write
+
+                \[
+                \sigma = C \varepsilon \quad \text{and} \quad C = \frac{1}{S}, \tag{13, 14}
+                \]
+                where \(C\) is the elastic stiffness constant or stiffness. In general, a homogeneous stress and a homogeneous strain are usually specified by second-order tensors. If a homogeneous stress \(\sigma_{ij}\) is applied to a crystal, the resulting strain \(\varepsilon_{ij}\) is such that each component is linearly related to all components of the stress. Specifically, the 81 compliances \(s_{ijkl}\) that characterize the elastic properties of a crystal are components of a fourth-order tensor if they obey the law of tensor transformation during the change of coordinate axes, given by:
+                \begin{equation}
+                       T'_{ijkl} = a_{im} a_{jn} a_{ko} a_{lp} T_{mnop}.
+                \end{equation}
+
+                In the theory of elasticity, the elastic potential energy, denoted as \(\Psi\), is a function of the deformation components \(\epsilon_i\) of a body. These components are associated with the stresses \(\sigma_{ij}\) through the elasticity constants \(c_{ij}\), which characterize the material's response to the imposed deformations. The relationship between stresses and strains in this context is formalized by the derivative of the elastic potential energy with respect to the strain components:
+
+                \begin{equation} \label{eq:energia_potencial} \tag{15}
+                \frac{\partial \Psi}{\partial \epsilon_i} = c_{ij} \epsilon_j,
+                \end{equation}
+
+
+                where \(c_{ij}\) represents the elasticity constants of the material. This equation illustrates a specific case of Hooke's law for elastic materials, connecting stress, strain, and the material's elastic properties (NYE, 2006).
+
+                To explore the symmetric properties of elasticity constants, we differentiate both sides of the above equation with respect to another strain component \(\epsilon_j\):
+                \[
+                \frac{\partial}{\partial \epsilon_j} \left( \frac{\partial \Psi}{\partial \epsilon_i} \right) = c_{ij}. \tag{16}
+                \]
+                Given that the potential energy function \(\Psi\) depends only on the current state of deformation of the body, and not on the sequence of how these deformations were applied, we conclude that the order of differentiation is irrelevant. Therefore, the stiffness matrix \(c_{ij}\) is symmetric:
+                \[
+                c_{ij} = c_{ji}. \tag{17}
+                \]
+
+                Furthermore, there is a direct relationship between the elasticity constants \(c_{ij}\) and the compliances \(s_{ij}\), which are coefficients that describe the deformation of the material under applied stress:
+                \[
+                s_{ij} = s_{ji}. \tag{18} \label{eq:18}
+                \]
+
+                This symmetry in the stiffness and compliance tensors is a fundamental property of elastic materials, indicating that stress responses are independent of the order of applied loads. The symmetry of the matrices \((c_{ij})\) and \((s_{ij})\), indicated by relations (\ref{eq:19}) and (\ref{eq:20}), reduces the number of independent stiffness and compliance constants from 36 to 21, which significantly simplifies the analysis of elasticity problems. By integrating equation (\ref{eq:18}) and utilizing the symmetry property (\ref{eq:19}), it is determined that the work required to produce a deformation \(\epsilon_i\) in a unit volume of the crystal, known as strain energy, is given by:
+
+                \[
+                \frac{1}{2}c_{ij} \epsilon_i \epsilon_j \tag{19} \label{eq:19}
+                \]
+                as referenced in Chapter III, equation (\ref{eq:20}). The presence of symmetry in the crystal implies a reduction in the number of independent constants \(s_{ij} \) and \(c_{ij} \). Elasticity is a property that remains unchanged under the operation of a center of symmetry, which means that if the reference axes are transformed by such an operation, the components of the stiffness and compliance tensors do not change. The proof is direct: the elements \(a_{ij} \) of the transformation matrix correspond to \(-\delta_{ij} \). Thus, based on equation (\ref{eq:11}), we have:
+
+                \[
+                s'_{ijkl} = \delta_{im} \delta_{jn} \delta_{ko} \delta_{lp} s_{mnop} = s_{ijkl}, \tag{20} \label{eq:20}
+                \]
+
+                <p>highlighting the substitution property of \( \delta_{ij} \) (page 35), and similarly for \( c_{ijkl} \).</p>
+
+                <p>Symmetry elements that are not centers impose additional conditions on the elastic constants. These conditions can be deduced by symmetry arguments similar to those used for piezoelectric modules. For example, in orthorhombic class 222, the compliance \( s_{34} \), which measures the extension in the \( Ox_3 \) direction due to shear around the \( Ox_1 \) direction, becomes zero if we consider the operation of a parallel diad axis to \( Boi_2 \). This shows that the crystal, and consequently the extension along \( Ox_3 \), does not change, implying that \( s_{34} = 0 \). Similar arguments can be applied to other conformities in different classes of crystals.</p>
+
+                <p>The matrices \( E_{hkl} \) and \( S \) are symmetric, which means that the corresponding elements on both sides of the main diagonal are equal (\( a_{ij} = a_{ji} \)), a consequence of the fact that The potential energy of the system is a quadratic function <a href="#ref-nye1985physical">[1]</a>. In many data compendia, such as reference tables, it is more common to find elastic constants \( c_{ij} \) rather than stiffness moduli \( s_{ij} \).</p>
+
+                <p>More generally, the Equation (\ref{eq:11}) can be represented using matrix notation. Applying the conditions described in Equation (\ref{eq:12}), we obtain the equation (\ref{eq:23}). The entries below the main diagonal, specifically in the lower-left half of the matrix, merely confirm that the values above and below the diagonal are identical, illustrating the matrix's symmetry with respect to the main diagonal.</p>
+
+
+
+                \begin{equation}\label{eq:strain_matrix} \tag{21}
+                \begin{pmatrix}
+                \varepsilon_{1}\\
+                \varepsilon_{2}\\
+                \varepsilon_{3}\\
+                \varepsilon_{4}\\
+                \varepsilon_{5}\\
+                \varepsilon_{6}\\
+                \end{pmatrix}
+                =
+                \begin{pmatrix}
+                s_{11}&s_{12} &s_{13}&s_{14}&s_{15}&s_{16}\\
+                \bullet &s_{22} &s_{23}&s_{24}&s_{25}&s_{26}\\
+                \bullet &\bullet &s_{33}&s_{34}&s_{35}&s_{36}\\
+                \bullet &\bullet &\bullet&s_{44}&s_{45}&s_{46}\\
+                \bullet &\bullet &\bullet&\bullet&s_{55}&s_{56}\\
+                \bullet &\bullet &\bullet&\bullet&\bullet&s_{66}\\
+                \end{pmatrix}
+                \begin{pmatrix}
+                \sigma_{1}\\
+                \sigma_{2}\\
+                \sigma_{3}\\
+                \sigma_{4}\\
+                \sigma_{5}\\
+                \sigma_{6}\\
+                \end{pmatrix}
+                \end{equation}
+
+                For the triclinic system, the matrix \(S\) is given by equation (\ref{eq:23}) and the inverse of Young's modulus can be calculated by equation (\ref{eq:23}).
+
+                \begin{equation}\label{eq_S} \tag{22}
+                S
+                =
+                C^{-1}
+                =
+                \begin{pmatrix}
+                s_{11}&s_{12} &s_{13}&s_{14}&s_{15}&s_{16}\\
+                \bullet &s_{22} &s_{23}&s_{24}&s_{25}&s_{26}\\
+                \bullet &\bullet &s_{33}&s_{34}&s_{35}&s_{36}\\
+                \bullet &\bullet &\bullet&s_{44}&s_{45}&s_{46}\\
+                \bullet &\bullet &\bullet&\bullet&s_{55}&s_{56}\\
+                \bullet &\bullet &\bullet&\bullet&\bullet&s_{66}\\
+                \end{pmatrix}
+                =
+                {\begin{pmatrix}
+                c_{11}&c_{12} &c_{13}&s_{14}&c_{15}&c_{16}\\
+                \bullet &c_{22} &c_{23}&c_{24}&c_{25}&c_{26}\\
+                \bullet &\bullet &c_{33}&c_{34}&c_{35}&c_{36}\\
+                \bullet &\bullet &\bullet&c_{44}&c_{45}&c_{46}\\
+                \bullet &\bullet &\bullet&\bullet&c_{55}&c_{56}\\
+                \bullet &\bullet &\bullet&\bullet&\bullet&c_{66}\\
+                \end{pmatrix}}^{-1}
+                \end{equation}
+
+                No surface can completely represent the elastic behavior of a crystal. However, a practical and useful surface is one that illustrates the variation of Young's Modulus with direction. Consider a bar of the crystal cut so that its length is parallel to some arbitrary direction, denoted as \(\sigma_{1}'\). Stress typically induces not only longitudinal and lateral deformations but also shear. Young's Modulus for the stress direction is defined as the ratio of longitudinal stress to longitudinal strain, i.e., \(1/s_{11}'\). Surfaces on which the radius vector in the \(\sigma_{1}'\) direction is proportional to both \(s_{11}\) and \(1/s_{11}'\) are widely used. In practice, surfaces are used where the radius vector in the \(\sigma_{1}'\) direction is proportional to \(s_{11}\) and \(1/s_{11}'\) \cite{nye1985physical}.
+                In triclinic systems specifically, the matrix \(S\) is defined by Equation (\ref{eq_S}), and the inverse of Young's modulus is obtained from Equation (\ref{eq:23}), underscoring the inherent symmetry of matrix \(S\). Given the available elastic constants, Young's modulus is calculated using the subsequent expression:
+
+                \begin{equation}
+                \begin{aligned}[t]
+                \frac{1}{E_{hkl}} = &\alpha_1^4s_{11} + 2\alpha_1^2\alpha_2^2s_{12} + 2\alpha_1^2\alpha_3^2s_{13} + 2\alpha_1\alpha_2\alpha_3s_{14} + 2\alpha_1^3\alpha_3s_{15} + 2\alpha_1^3\alpha_2s_{16} \\
+                &+ \alpha_2^4s_{22} + 2\alpha_2^2\alpha_3^2s_{23} + 2\alpha_2^3\alpha_3s_{24} + 2\alpha_1\alpha_2\alpha_3^2s_{25} + 2\alpha_1^2\alpha_2\alpha_3s_{26} + \alpha_3^4s_{33} \\
+                &+ 2\alpha_2\alpha_3^3s_{34} + 2\alpha_1\alpha_3^3s_{35} + 2\alpha_1\alpha_3^2\alpha_2s_{36} + \alpha_2^2\alpha_3^2s_{44} + 2\alpha_1\alpha_2\alpha_3^2s_{45} + 2\alpha_1\alpha_2\alpha_3^2s_{46} \\
+                &+ \alpha_1^2\alpha_3^2s_{55} + 2\alpha_1^2\alpha_2\alpha_3s_{56} + \alpha_1^2\alpha_2^2s_{66}.
+                \end{aligned}
+                \label{eq:23}
+                \tag{23}
+                \end{equation}
+
+                where \(\alpha_i\) are the directing cosines of a vector that represents the crystallographic direction \([hkl]\) of the reciprocal lattice given by the set of equations corresponding to (\ref{alphas}).
+
+                \begin{align}\label{alphas} \tag{24, 25, 26}
+                \alpha_1 &= \frac{h}{\sqrt{h^2+k^2+l^2}} &
+                \alpha_2 &= \frac{k}{\sqrt{h^2+k^2+l^2}} &
+                \alpha_3 &= \frac{l}{\sqrt {h^2+k^2+l^2}}.
+                \end{align}
+
+                The components of matrix \(S\) are referred to as the material's elastic constants. The elastic constants \(s_{ij}\) have been determined for various materials as found in \cite{book:12974}.
+
+
+                The expressions for the reciprocal of Young's Modulus in the direction of the unit vector \(l_i\) in various crystal systems are collected here.
+
+
+
+                Note that in the cubic system, Young's Modulus is not isotropic. The variation with direction depends on \( \frac{1}{2}(l_1^2l_2^2 + l_2^2l_3^2 + l_3^2l_1^2) \). This quantity is zero for the cube axis directions \( <100> \) and reaches its maximum value of \( \frac{1}{3} \) in the directions \( <111> \). Therefore, if \( s_{11} - s_{12} - \frac{1}{2}s_{44} \) is positive (as it is for all cubic metals except molybdenum), Young's Modulus is maximum in the \( <111> \) directions and minimum in the \( <100> \) directions. A surface for which the radius vector is directly proportional to Young's Modulus would then have the shape of a cube with rounded corners and depressions in the center of the faces. Its central sections normal to \( <111> \) are easily seen as circles. \( s_{11} - s_{12} - \frac{1}{2}s_{44} = 0 \) is the condition for elastic isotropy. If \( s_{11} - s_{12} - \frac{1}{2}s_{44} \) is negative, Young's Modulus is minimum for \( <111> \) and maximum for \( <100> \). The Young's Modulus surface then has protrusions along the cube axes.\footnotemark
+
+                \footnotetext{Representation surfaces for both Young's Modulus and the torsion modulus of a cylinder are illustrated in the books by Wooster (1938) and Schmid and Boas (1950).}
+
+                <p> Under low stress conditions, where Hooke's Law is applicable, the deformation is directly proportional to the intensity of the applied stress. In anisotropic form, models can be derived from two assumptions: the Uniform Strain Stress Model and the Uniform Energy Density Model (UDSM and UDEDM).</p>
+
+                <p>In the UDSM and UDEDM models, the microtension σ in the crystal structure is treated as a constant, being calculated according to Hooke's Law. However, the aspect that varies with the crystallographic direction is the Young's modulus.</p>
+            </ul>
+        </div>
+
+        <ul>
+            <li>
+                <a href="javascript:void(0);" onclick="toggleContent('UDSM');">Uniform Deformation Stress Model (UDSM)</a>
+            </li>
+
+                <div id="UDSM" class="content">
+                    <ul>
+                            <p>UDSM is an anisotropic model that considers that the microstrain varies for each crystallographic direction. This is important because the microstructure of a material can be affected differently in different directions depending on its crystalline orientation. The model uses the Williamson-Hall equation given by (\ref{eq:4}) to relate the width of the diffractogram peaks with the microstrain and crystallite size, but now with a microstrain value for each crystallographic direction.</p>
+
+                            <p>\[
+                                \begin{equation} \label{eq:WH_UDEDM}
+                                \tag{27}
+                                    \frac{\beta_{hkl} \cos\theta_{hkl}}{\lambda} = \frac{K}{\langle D \rangle} + \sigma\frac{ 4\sin\theta_{hkl}}{\lambda E_{hkl}}
+                                \end{equation} \]
+                            </p>
+
+                            <p>The lattice stress \( \sigma \) is considered constant and is calculated by Hooke's Law, while Young's modulus \( E_{hkl} \) varies with the crystallographic direction. To calculate the values of \( \langle D \rangle \) and \( \varepsilon_{hkl} \), it is necessary to obtain the values of \( \beta_{hkl} \), \( 2\theta_{hkl} \), \( h \), \( k \), and \( l \) of each peak of the sample diffractogram, which are used to determine the ordered pairs \( (x, y) \) for each peak. The microstrain \( \varepsilon_{hkl} \) in each crystallographic direction can be obtained from equation (\ref{eq:e_UDEDM}).</p>
+
+                            <p>\[ \begin{equation} \label{eq:e_UDEDM}
+                                \tag{28}
+                                \varepsilon_{hkl} = \frac{\sigma}{E_{hkl}}
+                                \end{equation}
+                                \]
+                            </p>
+
+                            <p>From \( \langle D \rangle \) and \( \sigma \), it is possible to calculate the microstrain \( \varepsilon_{hkl} \) in each crystallographic direction using Hooke's law. The arithmetic mean of the values of \( \varepsilon_{hkl} \) is often calculated to obtain an average microstrain value \( \langle \varepsilon \rangle \). The UDSM model is useful for investigating anisotropy in the microstructure of polycrystalline materials.</p>
+                    </ul>
+                </div>
+
+        </ul>
+
+        <ul>
+            <li>
+                <a href="javascript:void(0);" onclick="toggleContent('UDEDM');">Uniform Deformation Energy Density Model (UDEDM)</a>
+            </li>
+
+                <div id="UDEDM" class="content">
+                    <ul>
+                            <p>In the UDSM and UDEDM models, the microtension σ in the crystal structure is treated as a constant, being calculated according to Hooke's Law. However, the aspect that varies with the crystallographic direction is the Young's modulus.</p>
+                            <p>The UDEDM uses the Williamson-Hall equation represented by (\ref{eq:WH}) to determine the microdeformation \( \epsilon_{hkl} \) in different crystallographic directions. The strain energy density \( u \) is calculated by equation (\ref{eq:ude}), where \( E_{hkl} \) is Young's modulus.</p>
+
+                            <p>\[
+                                \begin{equation} \tag{29}
+                                u = \frac{E_{hkl}\epsilon_{hkl}^2}{2}
+                                \label{eq:ude}
+                                \end{equation}
+                                \]
+                            </p>
+
+                            <p>To calculate the values of \( \langle D \rangle \) and \( \epsilon_{hkl} \), one must consider the values of \( \beta_{hkl} \), \( 2\theta_{hkl} \), \( h \), \( k \), and \( l \) for each peak of the sample diffractogram. From such data, ordered pairs \( (x, y) \) are determined for each peak, where \( x = \frac{4 \sqrt{2 \sin{\theta}}}{\lambda \sqrt{E_{ hkl } }} \) and \( y = \frac{\beta{\cos{\theta}}}{\lambda} \). A linear fit is performed with this set of points. It is assumed that \( k \) is the linear coefficient (or intercept) and \( \langle D \rangle /u \) is the slope, whereas \( \langle D \rangle \) is the average crystallite size and \( u \) is the strain energy density in equation (\ref{eq:ude}).</p>
+
+                            <p>\[
+                                \begin{equation} \tag{30}
+                                \label{eq:betaude}
+                                \frac{\beta_{hkl} \cos\theta_{hkl}}{\lambda} = \frac{K}{\langle D \rangle} + \sqrt{u} \frac{4 \sqrt{2} \sin{\theta_{hkl}}}{\lambda \sqrt{E_{hkl}}}
+                                \end{equation}
+                                \]
+                            </p>
+
+                            <p>To calculate the microstrain in each crystallographic direction, one should consider \( \epsilon_{hkl} = \sqrt{\frac{2u}{E_{hkl}}} \). It is very common to adopt the arithmetic mean of the values assumed by \( \epsilon_{hkl} \) to obtain an average value \( \langle \epsilon \rangle \).</p>
+                    </ul>
+                </div>
+        </ul>
+
+        <p><h3> Examples - Isotropis Model </h3></p>
+
+        <div>
+            <ul>
+                <li>
+                    <a href="javascript:void(0);" onclick="toggleContent('UDM-WHP');">Williamson-Hall-UDM</a>
+                </li>
+
+
+                <div id="UDM-WHP" class="content">
+
+                    <p> This section presents some examples of how to calculate sizes and microdeformations from isotropic and anisotropic models using SSM from sample diffraction data <em> COFE <SUB> 2 </sub> Sub> </em> (<em> fco </em>) as provided by <a href="#"> [1] </a>. The measurements were performed with angle <em> \ (2 \ theta \) </em> varying between <em> 10 </em> and <em> 100 </em> degrees at room temperature using an x -ray tube of copper with wavelength of only 1.54 å. Cobalt ferrite (bulk) has a cubic unit cell with a space group <em> fd-3m </em> (<em> 227 </em>) and cell parameters <em> a = b = c = 0.83919 Nm </em> (<em> icdd 00-022-1086 </em>) (). Its structure can be reverse spinel or mixed spinel. In all isotropic and anisotropic models the procedure is similar, differing only in choosing the model. Therefore, only the use of an isotropic model and an anisotropic model is described here. </p>
+
+                    <p> For users who use GSAS II software, widths and angular positions, among other parameters needed to make adjustments, can be obtained following the following steps: "Export/Powder data as/CSV reflection list". </p>
+
+                    <p style="text-align: center;">
+                        <img src="{{ url_for('static', filename='img4.png')}}" style="width: 600px; height: 350px;">
+                    </p>
+
+
+                    <P> Then open the .csv file as a text editor. </p>
+
+                    <p style="text-align: center;">
+                        <img src="{{ url_for('static', filename='img5.png')}}" style="width: 600px; height: 350px;">
+                    </p>
+
+                    <p> A window containing the necessary information to perform the adjustment will open as in the following figure.</p>
+
+
+                    <p style="text-align: center;">
+                        <img src="{{ url_for('static', filename='img6.png')}}" style="width: 600px; height: 350px;">
+                    </p>
+
+
+                    <p> If there is more than one phase, edit the file and leave only the information pertaining to the desired phase, as shown in the figure below. Then save and close the window. After all these steps, the .csv file is ready to be loaded into the SSM. </p>
+
+
+                    <p style="text-align: center;">
+                        <img src="{{ url_for('static', filename='img7.png')}}" style="width: 600px; height: 350px;">
+                    </p>
+
+                    <p> When accessing the MSS interface, the first step for the user is to load the "Instrumental File (<em>SRM-LineWidth</em>)". This is done by clicking on the "Input File" button located on the menu bar. After this procedure, the user should select the desired wavelength and choose a .csv file, which should contain the data obtained from the refinement related to the standard sample. To complete the process, click on "Fit Instrumental File". </p>
+
+                    <p style="text-align: center;">
+                        <img src="{{ url_for('static', filename='img1.png')}}" style="width: 600px; height: auto;">
+                    </p>
+
+                    <p> The visualization of the adjusted values can be seen in the subsequent figure, titled "Instrumental File". This graph, resulting from the adjustment process, clearly and accurately illustrates the calibration performed in accordance with the <em>LaB<sub>6</sub></em> (<em>SRM660</em>) standard. This graphical representation facilitates the understanding and analysis of the applied adjustments. </p>
+
+                    <p style="text-align: center;">
+                        <img src="{{ url_for('static', filename='img2.png')}}" style="width: 600px; height: 350px;">
+                    </p>
+
+
+
+                    <p>
+                        With the “instrumental file” already loaded, the user should click on the "Isotropic Models" button to select the desired model, then load the file containing the FWHM and positions of each diffraction peak obtained from the refinement of structures, and finally click on "Fit Model".
+                    </p>
+
+                    <p style="text-align: center;">
+                        <img src="{{ url_for('static', filename='img8.png')}}" style="width: 600px; height: 350px;">
+                    </p>
+
+
+                    <p>The values of size and microstrain can be seen at the top of the window that represents the adjustment of the WHP model. The MSS also allows the user to export all the adjusted and calculated data by the program, it is enough to click on the “Export Data” button located at the bottom of the screen and select the extension in which the file should be exported.</p>
+
+                    <p style="text-align: center;">
+                        <img src="{{ url_for('static', filename='img9.png')}}" style="width: 600px; height: 350px;">
+                    </p>
+
+                </div>
+
+
+            </ul>
+        </div>
+
+
+        <p><h3> Examples - Anisotropis Model </h3></p>
+
+        <div>
+            <ul>
+                <li>
+                    <a href="javascript:void(0);" onclick="toggleContent('UDEDM-WHP');">Williamson-Hall-UDEDM</a>
+                </li>
+
+                <div id="UDEDM-WHP" class="content">
+                    <ul>
+                        <p>For anisotropic models, the material's elastic stiffness constants \( s_{ij} \) are required. The constants for FM are: \( s_{11} = 6.8 (TPa)^{-1} \), \( s_{12} = -2.2 (TPa)^{-1} \), and \( s_{44} = 12.2 (TPa)^{-1} \). In anisotropic models, the user must also load the “instrumental” file by clicking on the “import” button in the menu bar and then selecting the instrumental file as mentioned in the previous example. The user should click on the "Anisotropic Model" tab and select the desired model (UDEDM - WHP), and finally load the .csv file containing the FWHM and the angular positions of each diffraction peak, as shown in the following figure. </p>
+
+                        <p style="text-align: center;">
+                            <img src="{{ url_for('static', filename='img10.png')}}" style="width: 600px; height: 350px;">
+                        </p>
+
+                        <p> Then click on "Insert Const" to insert the values of each elastic stiffness constant. A screen similar to the one below should appear. </p>
+
+                        <p style="text-align: center;">
+                            <img src="{{ url_for('static', filename='img11.png')}}" style="width: 660px; height: 150px;">
+                        </p>
+
+                        <p> Right after inserting the stiffness constants and clicking on "Fit Model", an adjustment for the anisotropic model WHP-UDEDM is shown in Figure ref{}. The values of size and microstrain can be seen at the top, as well as the adjustment of the WHP model. The MSS also allows the user to export all the adjusted and calculated data by the program, it is enough to click on the “Export Data” button located on the menu bar and select which files should be exported. </p>
+
+                        <p style="text-align: center;">
+                            <img src="{{ url_for('static', filename='img12.png')}}" style="width: 700px; height: 350px;">
+                        </p>
+
+                    </ul>
+
+
+                </div>
+            </ul>
+        </div>
+
+        <p><h3> Downloads </h3></p>
+
+<div>
+    <ul>
+        <li>
+            <a href="/download/instrumental_data">Instrumental Data</a>
+        </li>
+        <li>
+            <a href="/download/experimental_data">Experimental Data</a>
+        </li>
+    </ul>
+</div>
+
+
+
+           <h3><a href="javascript:void(0);" onclick="toggleContent('ref');">References</a></h3>
+
+
+
+        <div id="ref" class="content">
+            <ul>
+                <div class="referencia">
+                    <p>Paul, S. (1918). Bestimmung der größe und der inneren struktur von kolloidteilchen mittels röntgenstrahlen. <em>Nachr. Ges. Wiss. Göttingen</em>, 26, 98-100.</p>
+                </div>
+
+                <div class="referencia">
+                    <p>Stokes, A. R., & Wilson, A. J. C. (1944). The diffraction of X rays by distorted crystal aggregates-I. <em>Proceedings of the Physical Society (1926-1948)</em>, 56(3), 174. IOP Publishing.</p>
+                </div>
+
+
+                <div class="referencia">
+                    <p>Williamson, G. K., & Hall, W. H. (1953). [Título do artigo]. <em>Acta Metallurgica</em>, 1, 22.</p>
+                </div>
+
+
+                <div class="referencia">
+                    <p>Langford, J. I., & Wilson, A. J. C. (1978). Scherrer after sixty years: a survey and some new results in the determination of crystallite size. <em>Journal of Applied Crystallography</em>, 11(2), 102-113. International Union of Crystallography.</p>
+                </div>
+
+                <div class="referencia">
+                    <p>Halder, N., & Wagner, C. (1966). Separation of particle size and lattice strain in integral breadth measurements. <em>Acta Crystallographica</em>, 20, 312-313.</p>
+                </div>
+
+                <div>
+                    <p> A. R. Stokes and A. J. C. Wilson, Proceedings of the Physical Society 56, 174 (1944) </p>
+                </div>
+
+                <div>
+                    <p> J. F. Nye et al., Physical properties of crystals: their representation by tensors and matrices (Oxford university press, 1985) </p>
+                </div>
+
+                <div>
+                    <p> D. W. Snoke, Solid state physics: Essential concepts (Cambridge University Press, 2020) </p>
+                </div>
+
+                <div>
+                    <p> S. Hauss ̈uhl, Physical properties of crystals: an introduction (John Wiley & Sons, 2008) </p>
+                </div>
+
+                <div>
+                    <p> Every, A. G., & McCurdy, A. K. (1992). Second and Higher Order Elastic Constants. In D. F. N. E. (Auth.), Landolt-Börnstein  </p>
+                </div>
+
+                <div>
+                    <p> Maia, A. d. O. G., Oliveira, F. G. S., Cordeiro, C. H. N., et al. (2021). Journal of Sol-Gel Science and Technology, 99, 527. </p>
+                </div>
+
+            </ul>
+        </div>
+
+    </div>
+{% endblock %}

@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+
+{% block body %}
+
+    <style>
+            .container {
+
+                width: 55%; /* Ajuste a largura conforme desejado */
+                max-width: 1200px; /* Um máximo para evitar que fique muito grande em telas grandes */
+                margin: 20px auto; /* Para centralizar */
+                padding: 20px; /* Espaçamento interno para não colar o conteúdo nas bordas */
+                text-align: justify;
+            }
+
+            .cont {
+
+                width: 55%; /* Ajuste a largura conforme desejado */
+                max-width: 1200px; /* Um máximo para evitar que fique muito grande em telas grandes */
+                margin: 15px auto; /* Para centralizar */
+                padding: 15px; /* Espaçamento interno para não colar o conteúdo nas bordas */
+                text-align: justify;
+                background-color: White;
+                border-radius: 10px;
+                margin-top: 10px; /* Margem superior de 20px */
+                margin-bottom: 20px; /* Margem inferior de 20px */
+
+            }
+
+            .titulo-centralizado {
+                text-align: center;
+                margin-bottom: 10px;
+                margin-top: 10px;
+            }
+        /* Outras definições CSS para .container, etc. */
+    </style>
+
+    <style>
+        p {
+                text-indent: 20px; /* Indenta a primeira linha de cada parágrafo em 50 pixels */
+        }
+    </style>
+
+
+    <div class="cont">
+
+        <h2 class="titulo-centralizado"> Welcome to the Size Strain Model (SSM)  </h2>
+    </div>
+
+    <div class="container">
+        <h3><strong>Initial Instructions</strong></h3>
+
+        <p>SSM is a comprehensive and affordable microstructural analysis platform. This page incorporates a variety of advanced models, including Williamson-Hall (WHP), Size-Strain (SSP), and Halder-Wagner (HWP) graphical models. Models can be written considering two possible systems: isotropic, where mechanical properties are uniform in all directions, and anisotropic, where mechanical properties vary depending on the crystallographic direction.</p>
+
+        <p>In its isotropic form, the uniform deformation model (UDM) is derived directly from the Scherer and Stokes-Wilson equations. If in doubt, consult the manual.</p>
+
+        <p> Under low stress conditions, where Hooke's Law is applicable, the deformation is directly proportional to the intensity of the applied stress. In anisotropic form, models can be derived from two assumptions: the Uniform Strain Stress Model and the Uniform Energy Density Model (UDSM and UDEDM).</p>
+
+        <p> In the theory of elasticity, elastic potential energy, denoted as \(\Psi\), is a function of the strain components. These components are associated with stresses through the elasticity constants \(c_{ij}\), which characterize the material's response to imposed deformations. The relationship between stresses and strains in this context is formalized by the derivative of the elastic potential energy with respect to the strain components. Another way to analyze microstructural properties using elasticity constants, simply differentiate both sides of the equation in relation to another deformation component \(\epsilon_j\),</p>
+
+
+        <p>\[\frac{\partial}{\partial \epsilon_j} \left( \frac{\partial \Psi}{\partial \epsilon_i} \right) = c_{ij}.\] </p>
+
+        <p>This symmetry in the stiffness and compliance tensors reduces the number of independent constants from 36 to 21, simplifying the analysis of elasticity. The strain energy is expressed by, \( \frac{1}{2}c_{ij} \epsilon_i \epsilon_j .\) In the UDSM and UDEDM models, the microtension σ in the crystal structure is treated as a constant, being calculated according to Hooke's Law. However, the aspect that varies with the crystallographic direction is the Young's modulus. </p>
+
+        <h3> <strong> Features </strong> </h3>
+        <ul>
+            <li>Easy data input through organized fields</li>
+            <li>Support for various microstructural analysis models</li>
+            <li>Detailed descriptions and equations for model fits</li>
+            <li>Efficient and accurate calculation of particle size and microstrain</li>
+        </ul>
+
+        <h3><strong> Models and Techniques </strong></h3>
+        <p> SSM employs various models for precise microstructural analysis:</p>
+        <ul>
+            <li>Williamson-Hall Plot (WHP)</li>
+            <li>Size Stress Plot (SSP)</li>
+            <li>Halder-Wagner Plot (HWP) for isotropic systems</li>
+            <li>Uniform Strain Stress Model (UDSM)</li>
+            <li>Uniform Strain Energy Density Model (UDEDM) for anisotropic systems</li>
+        </ul>
+
+        <h3><strong> Applications </strong></h3>
+        <p> SSM is invaluable for professionals and students in various fields including materials engineering, metallurgy, and materials science. It aids in understanding the relationship between microstructure and material properties, facilitating accurate predictions and analysis. SSM is the ideal choice for those seeking efficiency and precision in microstructural analyses. Discover more about how SSM can boost your research and projects. SSM is available for free use and has open source code. If you make use of SSM, we strongly recommend that you cite our work in your articles.</p>
+    </div>
+{% endblock %}
